@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 30pt;
+    padding: 30pt;
+    overflow: hidden;
+}
+
+.slides-container {
+    position: relative; /* Gör det möjligt att absolut positionera barn i förhållande till denna behållare */
+}   
+
+.slide {
+    display: none;
+    position: absolute;
+    width: 100%;
+}
+.slide.active {
+    display: block;
+}
+
+.slide-content {
+    display: flex;
+    align-items: center flex-start; /* Detta kommer att centrera innehållet vertikalt */
+    gap: 1cm; /* Detta skapar ett avstånd på 1 cm mellan texten och bilden */
+    max-height: 100vh;
+    overflow: hidden;
+}
+.slide-content.reverse .text {
+    order: 2; /* Placera texten till vänster */
+}
+
+.slide-content.reverse .image {
+    order: 1; /* Placera bilden till höger */
+    align-self: flex-start; /* Placera bilden helt till högerkanten */
+}
+
+.text {
+    order: 1; /* Som standard, placera texten till höger */
+    text-align: left; /* Texten är vänsterställd */
+    flex: 1; /* Tillåt texten att ta upp all tillgänglig plats, men den kommer att begränsas av bilden */
+}
+
+.image {
+    padding-top:4pt; /* hack to get text to align with the picture somewhat more...*/
+    order: 2; /* Som standard, placera bilden till vänster */
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}    
+
+p{margin-top: 0px;}
+
+.code {
+    font-family: Consolas, Monaco, Courier New, monospace;
+    color: #5376b0;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
