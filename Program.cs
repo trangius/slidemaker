@@ -39,6 +39,7 @@ public class Program
     {
         var regex = new Dictionary<Regex, Type>
         {
+            // See this to create regex: https://regex101.com/
             { new Regex(@"(?s)\*\*\*((?:(?!\*\*\*).)*)"), typeof(NSlide) },
             { new Regex(@"(?m)^#[^#](.*)"),   typeof(NH1) }, // TODO: fix regex so we don't need space efter #.
             { new Regex(@"(?m)^##[^#](.*)"),   typeof(NH2) },
