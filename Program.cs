@@ -43,9 +43,9 @@ public class Program
             { new Regex(@"(?s)\*\*\*((?:(?!\*\*\*).)*)"), typeof(NSlide) },
 
 //            { new Regex(@"(?m)^[a-öA-Ö](.*$)"),   typeof(NP) }, // TODO: make this work...
-            { new Regex(@"(?m)^#[^#](.*)"),   typeof(NH1) }, // TODO: fix regex so we don't need space efter #.
-            { new Regex(@"(?m)^##[^#](.*)"),   typeof(NH2) },
-            { new Regex(@"(?m)^###[^#](.*)"),   typeof(NH3) }, 
+            { new Regex(@"(?m)^#([^#].*)"),   typeof(NH1) },
+            { new Regex(@"(?m)^##([^#].*)"),   typeof(NH2) },
+            { new Regex(@"(?m)^###([^#].*)"),   typeof(NH3) }, 
 
             // With beginning and end
             { new Regex(@"`(.*?)`"),    typeof(NCode)},
