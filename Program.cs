@@ -41,12 +41,11 @@ public class Program
         {
             // See this to create regex: https://regex101.com/
             { new Regex(@"(?s)\*\*\*((?:(?!\*\*\*).)*)"), typeof(NSlide) },
-
-//            { new Regex(@"(?m)^[a-öA-Ö](.*$)"),   typeof(NP) }, // TODO: make this work...
             { new Regex(@"(?m)^#([^#].*)"),   typeof(NH1) },
             { new Regex(@"(?m)^##([^#].*)"),   typeof(NH2) },
             { new Regex(@"(?m)^###([^#].*)"),   typeof(NH3) }, 
 
+            { new Regex(@"(?m)^([a-öA-Ö].*)\n"),   typeof(NP) }, // TODO: make this work...
             // With beginning and end
             { new Regex(@"`(.*?)`"),    typeof(NCode)},
             { new Regex(@"_(.*?)_"),    typeof(NItalic)},
