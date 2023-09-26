@@ -36,35 +36,35 @@ public class NSlide : NCore
 }
 
 // ********************** TEXT STYLING  ********************** 
-public class NP : NCore
+public class NParagraph : NCore
 {
-  public override string StartTag => $"<p>";
+  public override string StartTag => $"\t<p>";
   public override string EndTag => "</p>\n";
 }
 public class NH1 : NCore
 {
-  public override string StartTag => $"<h1>";
+  public override string StartTag => $"\t<h1>";
   public override string EndTag => "</h1>\n";
 }
 public class NH2 : NCore
 {
-  public override string StartTag => $"<h2>";
+  public override string StartTag => $"\t<h2>";
   public override string EndTag => "</h2>\n";
 }
 public class NH3 : NCore
 {
-  public override string StartTag => $"<h3>";
+  public override string StartTag => $"\t<h3>";
   public override string EndTag => "</h3>\n";
 }
 public class NItalic : NCore
 {
   public override string StartTag => $"<i>";
-  public override string EndTag => "</i>\n";
+  public override string EndTag => "</i>";
 }
 public class NCode : NCore
 {
   public override string StartTag => $"<span class =\"code\">";
-  public override string EndTag => "</span>\n";
+  public override string EndTag => "</span>";
 }
 
 // TODO: this one should not be able to have children

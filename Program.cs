@@ -45,7 +45,7 @@ public class Program
             { new Regex(@"(?m)^##([^#].*)"),   typeof(NH2) },
             { new Regex(@"(?m)^###([^#].*)"),   typeof(NH3) }, 
 
-            { new Regex(@"(?m)^([a-öA-Ö].*)\n"),   typeof(NP) }, // TODO: make this work...
+            { new Regex(@"(?m)^([a-öA-Ö].*)\n"),   typeof(NParagraph) }, // TODO: make this work...
             // With beginning and end
             { new Regex(@"`(.*?)`"),    typeof(NCode)},
             { new Regex(@"_(.*?)_"),    typeof(NItalic)},
