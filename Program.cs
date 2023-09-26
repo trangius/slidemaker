@@ -41,6 +41,8 @@ public class Program
         {
             // See this to create regex: https://regex101.com/
             { new Regex(@"(?s)\*\*\*((?:(?!\*\*\*).)*)"), typeof(NSlide) },
+
+//            { new Regex(@"(?m)^[a-öA-Ö](.*$)"),   typeof(NP) }, // TODO: make this work...
             { new Regex(@"(?m)^#[^#](.*)"),   typeof(NH1) }, // TODO: fix regex so we don't need space efter #.
             { new Regex(@"(?m)^##[^#](.*)"),   typeof(NH2) },
             { new Regex(@"(?m)^###[^#](.*)"),   typeof(NH3) }, 

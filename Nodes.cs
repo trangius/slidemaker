@@ -36,6 +36,11 @@ public class NSlide : NCore
 }
 
 // ********************** TEXT STYLING  ********************** 
+public class NP : NCore
+{
+  public override string StartTag => $"<p>";
+  public override string EndTag => "</p>\n";
+}
 public class NH1 : NCore
 {
   public override string StartTag => $"<h1>";
