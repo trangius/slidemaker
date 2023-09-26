@@ -43,12 +43,14 @@ public class Program
             { new Regex(@"(?s)\*\*\*((?:(?!\*\*\*).)*)"), typeof(NSlide) },
             { new Regex(@"(?m)^#([^#].*)"),   typeof(NH1) },
             { new Regex(@"(?m)^##([^#].*)"),   typeof(NH2) },
-            { new Regex(@"(?m)^###([^#].*)"),   typeof(NH3) }, 
-
-            { new Regex(@"(?m)^([a-öA-Ö].*)\n"),   typeof(NParagraph) }, // TODO: make this work...
+            { new Regex(@"(?m)^###([^#].*)"),   typeof(NH3) },
+            { new Regex(@"(?m)^!(.*?)(?:\^(.*))?$"),    typeof(NImage)},
+            { new Regex(@"(?m)^([a-öA-Ö].*)\n"),   typeof(NParagraph) },
             // With beginning and end
             { new Regex(@"`(.*?)`"),    typeof(NCode)},
             { new Regex(@"_(.*?)_"),    typeof(NItalic)},
+            
+            
             // { new Regex(@"^\[(.*?)(?:\^(.*))?$"), typeof(NRLimage) },
             // { new Regex(@"^\](.*?)(?:\^(.*))?$"), typeof(NRLimage) },
         };
@@ -104,6 +106,16 @@ public class Program
                     txtNode.Text = textBefore;
                     parent.AddChild(txtNode);
                 }
+                if(firstNodeType == typeof(NImage))
+                {
+                    var imageNode = (NImage)Activator.CreateInstance(firstNodeType);
+                    imageNode.ImagePath = firstMatch.Groups[1].Value;
+                    imageNode.CssStyle = firstMatch.Groups[2].Value;
+                    parent.AddChild(imageNode);
+                    currentIndex = firstMatch.Index + firstMatch.Length;
+                    lastIndex = currentIndex;
+                    continue;
+                }
 
                 // Create the match as an instance with C# magic
                 NCore child = (NCore)Activator.CreateInstance(firstNodeType);
@@ -111,6 +123,7 @@ public class Program
                 currentIndex = firstMatch.Index + firstMatch.Length;
                 lastIndex = currentIndex;
                 var childMarkup = firstMatch.Groups[1].Value;
+                
 
                 BuildTree(child, childMarkup, regex, depth);
             }

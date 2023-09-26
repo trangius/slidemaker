@@ -76,6 +76,15 @@ public class NTxt : NCore
     return Text;
   }
 }
+// TODO: should there be classes that only have one startTag?
+public class NImage : NCore
+{
+  public string? ImagePath { get; set; }
+  public string? CssStyle { get; set; }
+  public override string StartTag => "<img src=\"" + ImagePath + "\" style=\"" + CssStyle + "\">\n";
+  public override string EndTag => "";
+}
+
 
 // public class NTextContent : NCore
 // {
@@ -88,13 +97,8 @@ public class NTxt : NCore
 //   public override string StartTag => "<div class=\"image\" style=\"" + CssStyle + "\"><img src=\"" + ImagePath + "\">\n";
 //   public override string EndTag => "</div>\n";
 // }
-// TODO: should there be classes that only have one startTag?
-// public class NImage : NCore
-// {
-//   public string? ImagePath { get; set; }
-//   public override string StartTag => "<img src=\"" + ImagePath + "\" style=\"" + CssStyle + "\">\n";
-//   public override string EndTag => "";
-// }
+
+
 // public class NParagraph : NCore
 // {
 //   public override string StartTag => $"<p>{Text}";
