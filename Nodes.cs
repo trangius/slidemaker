@@ -28,11 +28,26 @@ public class NCore
 
 public class NSlide : NCore
 {
+  public string? ImagePath { get; set; }
+  public string? ImgCssStyle { get; set; }
   public bool IsReversed { set; get; }
-  public override string StartTag => IsReversed
-      ? "<div class=\"slide\"><div class=\"slide-content reverse\"><div class=\"text\">\n"
-      : "<div class=\"slide\"><div class=\"slide-content\"><div class=\"text\">\n";
-  public override string EndTag => "</div></div></div>\n\n";
+
+  public override string StartTag
+  {
+    get
+    {
+      string reversed = "";
+      string lrimg = "";
+      if (IsReversed)
+        reversed = " reverse";
+      if (ImagePath != "")
+        lrimg = "<div class=\"image\" style=\"" + ImgCssStyle + "\"><img src=\"" + ImagePath + "\">\n";
+
+      return "<div class=\"slide\"><div class=\"slide-content" + reversed + "\"><div class=\"text\">\n";
+    }
+  }
+  public override string EndTag => ImagePath != "" ? "</div></div></div>\n\n" : "</div></div></div></div>\n\n";
+
 }
 
 // ********************** TEXT STYLING  ********************** 

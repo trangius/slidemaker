@@ -40,7 +40,9 @@ public class Program
         var regex = new Dictionary<Regex, Type>
         {
             // See this to create regex: https://regex101.com/
-            { new Regex(@"(?s)\*\*\*((?:(?!\*\*\*).)*)"), typeof(NSlide) },
+//            { new Regex(@"(?s)\*\*\*((?:(?!\*\*\*).)*)"), typeof(NSlide) },
+            { new Regex(@"(?m)\*\*\*\n^(\]|\[)?(.*?)(?:\^(.*))(.*)\n"), typeof(NSlide) }, // damn, it ought to be somthing like this...
+
             { new Regex(@"(?m)^#([^#].*)"),   typeof(NH1) },
             { new Regex(@"(?m)^##([^#].*)"),   typeof(NH2) },
             { new Regex(@"(?m)^###([^#].*)"),   typeof(NH3) },
@@ -49,10 +51,7 @@ public class Program
             // With beginning and end
             { new Regex(@"`(.*?)`"),    typeof(NCode)},
             { new Regex(@"_(.*?)_"),    typeof(NItalic)},
-            
-            
-            // { new Regex(@"^\[(.*?)(?:\^(.*))?$"), typeof(NRLimage) },
-            // { new Regex(@"^\](.*?)(?:\^(.*))?$"), typeof(NRLimage) },
+
         };
 
         NCore n_root = new NCore(); // just an empty root node to add stuff into.
@@ -98,6 +97,7 @@ public class Program
 
             if (firstMatch != null) // MATCH!
             {
+                string childMarkup = "";
                 if (firstMatch.Index > currentIndex)
                 {
                     // Add the text _before_ the match as an NTxt
@@ -106,7 +106,7 @@ public class Program
                     txtNode.Text = textBefore;
                     parent.AddChild(txtNode);
                 }
-                if(firstNodeType == typeof(NImage))
+                if (firstNodeType == typeof(NImage))
                 {
                     var imageNode = (NImage)Activator.CreateInstance(firstNodeType);
                     imageNode.ImagePath = firstMatch.Groups[1].Value;
@@ -116,14 +116,25 @@ public class Program
                     lastIndex = currentIndex;
                     continue;
                 }
-
+                if (firstNodeType == typeof(NSlide))
+                {
+                    var slideNode = (NSlide)Activator.CreateInstance(firstNodeType);
+                    // slideNode.isLeft = firstMatch.Groups[1].Value; // this one should decide L/R
+                    slideNode.ImagePath = firstMatch.Groups[2].Value;
+                    slideNode.ImgCssStyle = firstMatch.Groups[3].Value;
+                    parent.AddChild(slideNode);
+                    currentIndex = firstMatch.Index + firstMatch.Length;
+                    lastIndex = currentIndex;
+                    childMarkup = firstMatch.Groups[4].Value; // damn, how to get this with regexp?
+                    continue;
+                }
                 // Create the match as an instance with C# magic
                 NCore child = (NCore)Activator.CreateInstance(firstNodeType);
                 parent.AddChild(child);
                 currentIndex = firstMatch.Index + firstMatch.Length;
                 lastIndex = currentIndex;
-                var childMarkup = firstMatch.Groups[1].Value;
-                
+                childMarkup = firstMatch.Groups[1].Value;
+
 
                 BuildTree(child, childMarkup, regex, depth);
             }
