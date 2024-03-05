@@ -1,0 +1,14 @@
+***
+]img/01.jpg^width:40%
+#This is a slide
+It has _italicized_ and `code text`
+!img/02.jpg^width:200px;
+***
+#It has headings
+Body text
+##And subheading
+Body text
+###and third level (o is gone)
+***
+You can even do `code that is _italicized_`
+Clever, right?
