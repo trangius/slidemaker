@@ -42,8 +42,9 @@ public class Program
             // See this to create regex: https://regex101.com/
 //            { new Regex(@"(?s)\*\*\*((?:(?!\*\*\*).)*)"), typeof(NSlide) },
             { new Regex(@"(?m)\*\*\*\n^(\]|\[)?(.*?)(?:\^(.*))(.*)\n"), typeof(NSlide) }, // damn, it ought to be somthing like this...
+			// TODO: this does not seem to work properly, fix this regexp
 
-            { new Regex(@"(?m)^#([^#].*)"),   typeof(NH1) },
+			{ new Regex(@"(?m)^#([^#].*)"),   typeof(NH1) },
             { new Regex(@"(?m)^##([^#].*)"),   typeof(NH2) },
             { new Regex(@"(?m)^###([^#].*)"),   typeof(NH3) },
             { new Regex(@"(?m)^!(.*?)(?:\^(.*))?$"),    typeof(NImage)},
